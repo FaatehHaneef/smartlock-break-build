@@ -1,0 +1,29 @@
+# Per-instance secrets: regenerable from the roll, and contains the RSA private
+# key, PIN, and flag. Never commit.
+instance.txt
+**/instance.txt
+
+# Build outputs / binaries (assignment forbids binaries in the submission).
+SmartLock/smartlock/lock_server
+SmartLock/smartlock/hub_client
+SmartLock/smartlock/instance_generator
+SmartLock/v2_skeleton/lock_server2
+SmartLock/v2_skeleton/hub_client2
+*.o
+*.obj
+*.exe
+*.out
+*.elf
+
+# Compiled exploit/test binaries (track the .cpp, never the binary).
+23i-0688-E/exploits/*
+!23i-0688-E/exploits/*.cpp
+!23i-0688-E/exploits/*.hpp
+23i-0688-E/performance/bench
+23i-0688-E/performance/*.bin
+
+# Local scratch.
+*.tmp
+*.log
+*.swp
+.DS_Store
