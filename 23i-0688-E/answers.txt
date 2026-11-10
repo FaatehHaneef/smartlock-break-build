@@ -3,8 +3,8 @@
 # Values below are TO BE FILLED by the Part A exploits, each recovered from
 # captured traffic of this instance (not read from instance.txt).
 roll           = 23i-0688
-flag           = FLAG{...recover via keying exploit (A3)...}
-recovered_dh_b = 0
-cracked_pin    = ...recover via PIN crack...
+flag           = FLAG{4b9489d8c219ed28}
+recovered_dh_b = 46088512346
+cracked_pin    = ...recover via PIN crack (A2 / PIN phase)...
 # optional: hex of (greeting plaintext XOR STATUS-reply plaintext)
 nonce_xor_hex  =
