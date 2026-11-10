@@ -1,0 +1,25 @@
+C.2 A5 (replay) re-run against v2 - REJECTED
+
+v2 defeats replay on two independent levels:
+
+1. Sequence binding (securelink2.cpp). Every record carries an 8-byte sequence
+   number, authenticated as AAD and used to build the nonce. open_record() checks
+   the sequence number against the expected one and THROWS on a mismatch, so a
+   replayed or out-of-order record is refused before decryption. A tampered
+   record fails the GCM tag. The scaffold's record loop does `catch(...) break`,
+   so any such record drops the whole session.
+
+   Proven by the self-test (evidence/v2_selfcheck_output.txt), Check 5:
+     [PASS] open at wrong expected seqno throws      (replay / out-of-order)
+     [PASS] tampered record throws
+     [PASS] altered seqno header is rejected
+
+2. Forward secrecy (scaffold keying). The lock uses a FRESH 2048-bit ephemeral
+   DH exponent every session, so a replayed handshake yields a different shared
+   secret and therefore different HKDF keys. Records captured in an earlier
+   session can no longer be opened in a new one even before the sequence check,
+   because the key is not the same.
+
+Contrast with v1, where the static exponent + static nonce reproduced the exact
+session key, so a captured UNLOCK record decrypted and reopened the door
+(TASKA5). In v2 that same replay is rejected.

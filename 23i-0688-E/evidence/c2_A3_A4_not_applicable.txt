@@ -1,0 +1,19 @@
+C.2 A3 (keying) and A4 (nonce) re-run against v2 - NOT APPLICABLE
+
+A3: v2 uses 2048-bit ephemeral DH, signed. The DH message carries no small
+    (p,g) group and B is 256 bytes, so baby-step/giant-step is infeasible.
+    length of captured B (hex chars): 512
+    DH message has a signature field (sig:) : yes
+    And keys come from HKDF (not the raw secret).
+
+A4: each record carries an 8-byte sequence number -> a unique nonce per
+    record; the two directions use independent HKDF keys. No keystream reuse.
+    Per-record seqno headers (first 16 hex of each rec):
+           1	0000000000000000
+           2	0000000000000000
+           3	0000000000000001
+           4	0000000000000001
+           5	0000000000000002
+           6	0000000000000002
+           7	0000000000000003
+           8	0000000000000003
