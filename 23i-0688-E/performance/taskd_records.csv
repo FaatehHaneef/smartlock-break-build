@@ -1,0 +1,5 @@
+op,us_per_record,mbps_mean,mbps_sd
+v1 seal,0.922,1110.3,15.27
+v1 open,1.202,852.0,10.76
+v2 seal,1.089,941.0,24.08
+v2 open,1.240,826.6,28.35
