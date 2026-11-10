@@ -22,6 +22,9 @@ SmartLock/v2_skeleton/hub_client2
 23i-0688-E/performance/bench
 23i-0688-E/performance/*.bin
 
+# Dev tool binaries (track the .cpp, never the binary).
+tools/wiretap
+
 # Local scratch.
 *.tmp
 *.log
