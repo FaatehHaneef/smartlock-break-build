@@ -1,0 +1,10 @@
+# Part A recovered secrets for roll 23i-0688 (section E).
+# Format is key = value, one per line. Keep the keys exactly as below.
+# Values below are TO BE FILLED by the Part A exploits, each recovered from
+# captured traffic of this instance (not read from instance.txt).
+roll           = 23i-0688
+flag           = FLAG{...recover via keying exploit (A3)...}
+recovered_dh_b = 0
+cracked_pin    = ...recover via PIN crack...
+# optional: hex of (greeting plaintext XOR STATUS-reply plaintext)
+nonce_xor_hex  =
