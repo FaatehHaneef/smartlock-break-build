@@ -19,6 +19,7 @@ SmartLock/v2_skeleton/hub_client2
 23i-0688-E/exploits/*
 !23i-0688-E/exploits/*.cpp
 !23i-0688-E/exploits/*.hpp
+!23i-0688-E/exploits/*.txt
 23i-0688-E/performance/bench
 23i-0688-E/performance/*.bin
 
