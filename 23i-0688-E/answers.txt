@@ -7,4 +7,4 @@ flag           = FLAG{4b9489d8c219ed28}
 recovered_dh_b = 46088512346
 cracked_pin    = ...recover via PIN crack (A2 / PIN phase)...
 # optional: hex of (greeting plaintext XOR STATUS-reply plaintext)
-nonce_xor_hex  =
+nonce_xor_hex  = 0335282620446c382a3f2d6473180f1e1b2f0410561e
