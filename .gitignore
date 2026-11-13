@@ -32,3 +32,10 @@ tools/wiretap
 *.log
 *.swp
 .DS_Store
+
+# LaTeX build artifacts (keep the .tex source and the submission PDF)
+report/*.pdf
+report/*.aux
+report/*.log
+report/*.toc
+report/*.out
