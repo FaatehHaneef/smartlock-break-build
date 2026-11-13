@@ -1,75 +1,116 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="940" height="780" viewBox="0 0 940 780" font-family="Segoe UI, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="985" viewBox="0 0 1000 985" font-family="Segoe UI, Arial, sans-serif">
   <defs>
-    <marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L8,3 L0,6 Z" fill="#333"/>
-    </marker>
+    <marker id="aNeg" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#2563EB"/></marker>
+    <marker id="aAuth" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#7C3AED"/></marker>
+    <marker id="aKey" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#059669"/></marker>
+    <marker id="aRec" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#D97706"/></marker>
+    <marker id="aTear" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#475569"/></marker>
   </defs>
-  <rect x="0" y="0" width="940" height="780" fill="#ffffff"/>
-  <text x="470" y="34" text-anchor="middle" font-size="19" font-weight="bold" fill="#1f2a37">SmartLock v2 handshake (roll 23i-0688)</text>
-  <text x="470" y="54" text-anchor="middle" font-size="12" fill="#6b7280">authenticated key exchange, HKDF keys, unique-nonce AEAD, sequence-bound records</text>
 
-  <!-- actor headers -->
-  <rect x="120" y="70" width="170" height="40" rx="6" fill="#4C78A8"/>
-  <text x="205" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">HUB (client)</text>
-  <text x="205" y="128" text-anchor="middle" font-size="10.5" fill="#6b7280">pins lock's RSA public key</text>
-  <rect x="650" y="70" width="170" height="40" rx="6" fill="#E4572E"/>
-  <text x="735" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">LOCK (server)</text>
-  <text x="735" y="128" text-anchor="middle" font-size="10.5" fill="#6b7280">holds RSA private key, PIN-KDF</text>
+  <rect x="0" y="0" width="1000" height="985" fill="#FAFBFC"/>
+
+  <!-- title -->
+  <rect x="0" y="0" width="1000" height="66" fill="#1f2a37"/>
+  <text x="500" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffffff">SmartLock v2 Handshake</text>
+  <text x="500" y="52" text-anchor="middle" font-size="12.5" fill="#aeb6c2">authenticated key exchange &#183; HKDF keys &#183; unique-nonce AEAD &#183; sequence-bound records &#160;(roll 23i-0688)</text>
+
+  <!-- actor cards -->
+  <rect x="226" y="82" width="208" height="64" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+  <rect x="247" y="104" width="30" height="22" rx="3" fill="#2563EB"/><rect x="258" y="126" width="8" height="5" fill="#2563EB"/><circle cx="262" cy="115" r="3" fill="#EFF6FF"/>
+  <text x="290" y="110" font-size="14" font-weight="bold" fill="#1f2a37">HUB</text>
+  <text x="290" y="110" font-size="14" font-weight="bold" fill="#1f2a37" dx="38">(controller)</text>
+  <text x="290" y="130" font-size="10.5" fill="#64748b">pins the lock's public key</text>
+
+  <rect x="716" y="82" width="208" height="64" rx="10" fill="#FEF2F2" stroke="#E4572E" stroke-width="1.5"/>
+  <path d="M747,118 v-7 a8,8 0 0 1 16,0 v7" fill="none" stroke="#E4572E" stroke-width="2.5"/>
+  <rect x="742" y="114" width="26" height="20" rx="3" fill="#E4572E"/><circle cx="755" cy="122" r="2.5" fill="#FEF2F2"/><rect x="753.5" y="123" width="3" height="6" fill="#FEF2F2"/>
+  <text x="782" y="110" font-size="14" font-weight="bold" fill="#1f2a37">LOCK</text>
+  <text x="782" y="110" font-size="14" font-weight="bold" fill="#1f2a37" dx="44">(device)</text>
+  <text x="782" y="130" font-size="10.5" fill="#64748b">holds RSA private key + PIN</text>
 
   <!-- lifelines -->
-  <line x1="205" y1="140" x2="205" y2="748" stroke="#9aa5b1" stroke-width="1.5" stroke-dasharray="4 4"/>
-  <line x1="735" y1="140" x2="735" y2="748" stroke="#9aa5b1" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <line x1="330" y1="150" x2="330" y2="864" stroke="#9aa5b1" stroke-width="2" stroke-dasharray="3 5"/>
+  <line x1="820" y1="150" x2="820" y2="864" stroke="#9aa5b1" stroke-width="2" stroke-dasharray="3 5"/>
 
-  <!-- 1 HELLO hub->lock -->
-  <text x="470" y="166" text-anchor="middle" font-size="12" fill="#333">1. HELLO  suites = {AES256-GCM, AES128-GCM}  (no NULL)</text>
-  <line x1="208" y1="174" x2="732" y2="174" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
-  <text x="470" y="190" text-anchor="middle" font-size="11" font-style="italic" fill="#2E8B57">lock picks strongest common suite; aborts if none &#8594; defeats A1 (no NULL to downgrade to)</text>
+  <!-- ===================== STAGE 1 NEGOTIATION ===================== -->
+  <rect x="165" y="170" width="810" height="120" rx="9" fill="#EFF6FF"/>
+  <rect x="20" y="170" width="132" height="120" rx="9" fill="#2563EB"/>
+  <text x="86" y="222" text-anchor="middle" font-size="12" fill="#cfe0ff">STAGE 1</text>
+  <text x="86" y="244" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">Negotiation</text>
 
-  <!-- 2 SUITE lock->hub -->
-  <text x="470" y="222" text-anchor="middle" font-size="12" fill="#333">2. SUITE  suite</text>
-  <line x1="732" y1="230" x2="208" y2="230" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="330" y1="210" x2="820" y2="210" stroke="#2563EB" stroke-width="2.5" marker-end="url(#aNeg)"/>
+  <rect x="360" y="196" width="430" height="28" rx="14" fill="#ffffff" stroke="#2563EB" stroke-width="1.3"/>
+  <text x="575" y="214" text-anchor="middle" font-size="12.5" fill="#1f2a37">1. HELLO &#8594; suites = {AES256-GCM, AES128-GCM}  (no NULL)</text>
+  <line x1="820" y1="262" x2="330" y2="262" stroke="#2563EB" stroke-width="2.5" marker-end="url(#aNeg)"/>
+  <rect x="430" y="248" width="290" height="28" rx="14" fill="#ffffff" stroke="#2563EB" stroke-width="1.3"/>
+  <text x="575" y="266" text-anchor="middle" font-size="12.5" fill="#1f2a37">2. SUITE &#8592; strongest common, or abort</text>
 
-  <!-- 3 CERT lock->hub -->
-  <text x="470" y="262" text-anchor="middle" font-size="12" fill="#333">3. CERT  name, pubkey, sig</text>
-  <line x1="732" y1="270" x2="208" y2="270" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
-  <text x="470" y="286" text-anchor="middle" font-size="11" font-style="italic" fill="#4C78A8">[AUTH] hub checks pubkey == pinned key AND cert signature &#8594; defeats A2 (impersonation)</text>
+  <!-- ===================== STAGE 2 AUTHENTICATION ===================== -->
+  <rect x="165" y="298" width="810" height="150" rx="9" fill="#F5F3FF"/>
+  <rect x="20" y="298" width="132" height="150" rx="9" fill="#7C3AED"/>
+  <text x="86" y="362" text-anchor="middle" font-size="12" fill="#e4dbff">STAGE 2</text>
+  <text x="86" y="384" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">Authentication</text>
 
-  <!-- 4 PAIR hub->lock -->
-  <text x="470" y="318" text-anchor="middle" font-size="12" fill="#333">4. PAIR  PIN proof: challenge-response Hash(PIN, nonce), inside the AEAD channel (never a bare MD5)</text>
-  <line x1="208" y1="326" x2="732" y2="326" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
-  <text x="470" y="342" text-anchor="middle" font-size="11" font-style="italic" fill="#E4572E">[PIN] fresh nonce stops replay; sent only under the session key so nothing is offline-guessable; salted slow KDF at rest</text>
+  <line x1="820" y1="338" x2="330" y2="338" stroke="#7C3AED" stroke-width="2.5" marker-end="url(#aAuth)"/>
+  <rect x="405" y="324" width="340" height="28" rx="14" fill="#ffffff" stroke="#7C3AED" stroke-width="1.3"/>
+  <text x="575" y="342" text-anchor="middle" font-size="12.5" fill="#1f2a37">3. CERT &#8592; name, pubkey, signature</text>
+  <text x="575" y="368" text-anchor="middle" font-size="11" font-style="italic" fill="#7C3AED">hub checks pubkey == pinned key AND cert signature &#8594; defeats A2 impersonation</text>
 
-  <!-- 5 DH lock->hub -->
-  <text x="470" y="374" text-anchor="middle" font-size="12" fill="#333">5. DH  B = g^b mod p  (2048-bit, EPHEMERAL) + sig over (offered | suite | B)</text>
-  <line x1="732" y1="382" x2="208" y2="382" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
-  <text x="470" y="398" text-anchor="middle" font-size="11" font-style="italic" fill="#4C78A8">[AUTH-KEX] hub verifies signature &#8594; binds the negotiation (A1) and authenticates the DH value (A2)</text>
+  <line x1="330" y1="400" x2="820" y2="400" stroke="#7C3AED" stroke-width="2.5" marker-end="url(#aAuth)"/>
+  <rect x="360" y="386" width="430" height="28" rx="14" fill="#ffffff" stroke="#7C3AED" stroke-width="1.3"/>
+  <text x="575" y="404" text-anchor="middle" font-size="12.5" fill="#1f2a37">4. PAIR &#8594; PIN proof: Hash(PIN, nonce), inside the channel</text>
+  <text x="575" y="430" text-anchor="middle" font-size="11" font-style="italic" fill="#7C3AED">never a bare MD5; fresh nonce stops replay; salted slow KDF at rest &#8594; fixes PIN cracking</text>
 
-  <!-- 6 DHCLIENT hub->lock -->
-  <text x="470" y="430" text-anchor="middle" font-size="12" fill="#333">6. DHCLIENT  A = g^a mod p  (2048-bit, ephemeral)</text>
-  <line x1="208" y1="438" x2="732" y2="438" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
-  <text x="470" y="454" text-anchor="middle" font-size="11" font-style="italic" fill="#2E8B57">[KDF] shared = g^(ab); k_c2s = HKDF(shared,"c2s"), k_s2c = HKDF(shared,"s2c") &#8594; defeats A3 + forward secrecy</text>
+  <!-- ===================== STAGE 3 KEYING ===================== -->
+  <rect x="165" y="456" width="810" height="150" rx="9" fill="#ECFDF5"/>
+  <rect x="20" y="456" width="132" height="150" rx="9" fill="#059669"/>
+  <text x="86" y="520" text-anchor="middle" font-size="12" fill="#c7f5e2">STAGE 3</text>
+  <text x="86" y="542" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">Keying</text>
 
-  <!-- records band -->
-  <rect x="95" y="474" width="750" height="250" rx="8" fill="#f5f7fa" stroke="#dbe2ea"/>
-  <text x="470" y="494" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#475569">encrypted records - AES-GCM AEAD, unique nonce per record, per-direction keys</text>
+  <line x1="820" y1="496" x2="330" y2="496" stroke="#059669" stroke-width="2.5" marker-end="url(#aKey)"/>
+  <rect x="360" y="482" width="430" height="28" rx="14" fill="#ffffff" stroke="#059669" stroke-width="1.3"/>
+  <text x="575" y="500" text-anchor="middle" font-size="12.5" fill="#1f2a37">5. DH &#8592; B = g&#94;b (2048-bit, ephemeral) + signed transcript</text>
+  <text x="575" y="526" text-anchor="middle" font-size="11" font-style="italic" fill="#059669">hub verifies signature &#8594; binds negotiation (A1) and authenticates the DH value (A2)</text>
 
-  <!-- 7 greeting lock->hub -->
-  <text x="470" y="524" text-anchor="middle" font-size="12" fill="#333">7. MSG  rec = seal(k_s2c, seq=0, greeting with flag)</text>
-  <line x1="732" y1="532" x2="208" y2="532" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
-  <text x="470" y="548" text-anchor="middle" font-size="11" font-style="italic" fill="#F58518">[NONCE] nonce = f(seq); no (key,nonce) reuse &#8594; defeats A4 (two-time pad)</text>
+  <line x1="330" y1="558" x2="820" y2="558" stroke="#059669" stroke-width="2.5" marker-end="url(#aKey)"/>
+  <rect x="380" y="544" width="390" height="28" rx="14" fill="#ffffff" stroke="#059669" stroke-width="1.3"/>
+  <text x="575" y="562" text-anchor="middle" font-size="12.5" fill="#1f2a37">6. DHCLIENT &#8594; A = g&#94;a (2048-bit, ephemeral)</text>
+  <text x="575" y="588" text-anchor="middle" font-size="11" font-style="italic" fill="#059669">k_c2s = HKDF(shared,"c2s"), k_s2c = HKDF(shared,"s2c") &#8594; defeats A3 + forward secrecy</text>
 
-  <!-- 8 STATUS hub->lock -->
-  <text x="470" y="580" text-anchor="middle" font-size="12" fill="#333">8. MSG  rec = seal(k_c2s, seq=0, "STATUS")</text>
-  <line x1="208" y1="588" x2="732" y2="588" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
-  <text x="470" y="604" text-anchor="middle" font-size="11" font-style="italic" fill="#7B5EA7">[SEQ] seq bound as AAD; open_record rejects wrong seq &#8594; defeats A5 (replay / reorder)</text>
+  <!-- ===================== STAGE 4 RECORDS ===================== -->
+  <rect x="165" y="614" width="810" height="168" rx="9" fill="#FFFBEB"/>
+  <rect x="20" y="614" width="132" height="168" rx="9" fill="#D97706"/>
+  <text x="86" y="690" text-anchor="middle" font-size="12" fill="#ffe6bf">STAGE 4</text>
+  <text x="86" y="712" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">Records</text>
+  <text x="86" y="730" text-anchor="middle" font-size="10.5" fill="#ffe6bf">(AES-GCM AEAD)</text>
 
-  <text x="470" y="632" text-anchor="middle" font-size="11" fill="#6b7280">... each record: sequence number increments per direction; tamper fails the GCM tag ...</text>
+  <line x1="820" y1="652" x2="330" y2="652" stroke="#D97706" stroke-width="2.5" marker-end="url(#aRec)"/>
+  <rect x="385" y="638" width="380" height="28" rx="14" fill="#ffffff" stroke="#D97706" stroke-width="1.3"/>
+  <text x="575" y="656" text-anchor="middle" font-size="12.5" fill="#1f2a37">7. MSG &#8592; seal(k_s2c, seq=0, greeting + flag)</text>
+  <text x="575" y="682" text-anchor="middle" font-size="11" font-style="italic" fill="#D97706">nonce = f(seq), unique per record &#8594; defeats A4 nonce reuse (two-time pad)</text>
 
-  <!-- 9 QUIT -->
-  <text x="470" y="664" text-anchor="middle" font-size="12" fill="#333">9. MSG  rec = seal(k_c2s, seq=n, "QUIT")</text>
-  <line x1="208" y1="672" x2="732" y2="672" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
-  <text x="470" y="688" text-anchor="middle" font-size="11" font-style="italic" fill="#475569">authenticated, sequence-bound close &#8594; no silent truncation</text>
+  <line x1="330" y1="714" x2="820" y2="714" stroke="#D97706" stroke-width="2.5" marker-end="url(#aRec)"/>
+  <rect x="400" y="700" width="350" height="28" rx="14" fill="#ffffff" stroke="#D97706" stroke-width="1.3"/>
+  <text x="575" y="718" text-anchor="middle" font-size="12.5" fill="#1f2a37">8. MSG &#8594; seal(k_c2s, seq=0, "STATUS")</text>
+  <text x="575" y="744" text-anchor="middle" font-size="11" font-style="italic" fill="#D97706">seq bound as AAD; open_record rejects a wrong seq &#8594; defeats A5 replay / reorder</text>
+  <text x="575" y="768" text-anchor="middle" font-size="10.5" fill="#92400e">&#8230; each record: seq increments per direction; a tampered record fails the GCM tag &#8230;</text>
 
-  <!-- legend -->
-  <text x="120" y="762" font-size="10.5" fill="#6b7280">Defeats: A1 downgrade, A2 impersonation, A3 keying, A4 nonce reuse, A5 replay. Colour marks the protection active at each step.</text>
+  <!-- ===================== STAGE 5 TEARDOWN ===================== -->
+  <rect x="165" y="790" width="810" height="74" rx="9" fill="#F1F5F9"/>
+  <rect x="20" y="790" width="132" height="74" rx="9" fill="#475569"/>
+  <text x="86" y="822" text-anchor="middle" font-size="12" fill="#cdd5df">STAGE 5</text>
+  <text x="86" y="844" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">Teardown</text>
+
+  <line x1="330" y1="828" x2="820" y2="828" stroke="#475569" stroke-width="2.5" marker-end="url(#aTear)"/>
+  <rect x="380" y="814" width="390" height="28" rx="14" fill="#ffffff" stroke="#475569" stroke-width="1.3"/>
+  <text x="575" y="832" text-anchor="middle" font-size="12.5" fill="#1f2a37">9. MSG &#8594; seal(k_c2s, seq=n, "QUIT") &#8212; authenticated close</text>
+
+  <!-- ===================== LEGEND ===================== -->
+  <rect x="20" y="876" width="955" height="98" rx="9" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="34" y="898" font-size="12.5" font-weight="bold" fill="#1f2a37">Each stage closes one v1 attack:</text>
+  <circle cx="42" cy="918" r="5" fill="#2563EB"/><text x="54" y="922" font-size="11.5" fill="#334155">A1 downgrade &#8212; strong suites (no NULL) + signed transcript</text>
+  <circle cx="500" cy="918" r="5" fill="#7C3AED"/><text x="512" y="922" font-size="11.5" fill="#334155">A2 impersonation &#8212; pinned certificate + signed DH</text>
+  <circle cx="42" cy="940" r="5" fill="#059669"/><text x="54" y="944" font-size="11.5" fill="#334155">A3 keying &#8212; 2048-bit ephemeral DH + HKDF (forward secrecy)</text>
+  <circle cx="500" cy="940" r="5" fill="#D97706"/><text x="512" y="944" font-size="11.5" fill="#334155">A4 nonce reuse &#8212; unique nonce per record</text>
+  <circle cx="42" cy="962" r="5" fill="#E11D48"/><text x="54" y="966" font-size="11.5" fill="#334155">A5 replay &#8212; sequence-bound AEAD (open_record rejects a wrong seq)</text>
 </svg>
