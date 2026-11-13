@@ -40,6 +40,14 @@ and must therefore never expose a guessable function of the PIN.
 7. **PIN protection**: the PIN is not recoverable from a capture, and is not
    stored in a fast, unsalted form at rest.
 
+**Non-goal (scoped out).** Record-level *non-repudiation* is not a goal: records
+are protected with a shared AES-GCM key, so either party (anyone holding the key)
+could have produced a tag, and a third party cannot attribute a record to one side
+(per lecture). v2 provides entity authentication (pinned certificate + signed DH)
+and message integrity/authenticity, which is what a door lock needs; per-message
+non-repudiation would require asymmetric signatures on every record and is not
+warranted here.
+
 ## B.2 Per-stage mechanisms (each tied to the Part A attack it defeats)
 
 ### Stage 1 - Negotiation  (defeats A1, downgrade)
@@ -60,20 +68,28 @@ and must therefore never expose a guessable function of the PIN.
   verifies. A relay that presents its own certificate is rejected.
 - **Mechanism (PIN).** The v1 habit of sending a bare MD5 of the PIN in `PAIR` is
   removed. Two layers:
-  - *On the wire:* prove knowledge of the PIN with a **PAKE** (e.g. SPAKE2 or
-    OPAQUE) run **after** the authenticated key exchange, so the PIN is never sent
-    - not even as a hash - and a captured pairing yields nothing offline-guessable.
-    (A weaker but acceptable alternative is to send the PIN proof only inside the
-    established AEAD channel; a PAKE is preferred because it also resists a
-    malicious lock.)
+  - *On the wire:* the hub proves knowledge of the PIN with a fresh-nonce
+    **challenge-response** - the lock sends a random nonce and the hub returns
+    `Hash(PIN, nonce)` (the MS-CHAP pattern from lecture) - and that proof is
+    carried **only inside the authenticated, encrypted channel** established in
+    Stages 2-3. So the PIN never crosses the wire in any form; the fresh nonce
+    stops replay; and because the channel is authenticated (pinned certificate, so
+    no man in the middle) and encrypted (ephemeral-DH key), an eavesdropper who
+    captures the pairing sees only ciphertext and has nothing to offline-guess,
+    even though the PIN itself is low-entropy. (A dedicated PAKE such as SPAKE2
+    would give the same guarantee without relying on the outer channel, but it is
+    outside our syllabus, so we lean on the authenticated channel instead.)
   - *At rest:* the lock stores the PIN as a **salted, slow KDF** digest -
     Argon2id (or scrypt / PBKDF2 with a high iteration count) - never raw MD5, so
     a stolen device database is not trivially cracked.
+  - *Note:* the provided v2 scaffold deliberately keeps the v1 MD5 `PAIR` message
+    (a known limitation stated in the brief); the above is the design v2 should
+    adopt, and is a design requirement only.
 - **Why A2 (and the PIN crack) fail.** Key pinning plus signature verification
   means the man-in-the-middle's certificate is refused ("device key is not the
-  pinned key"), so it cannot complete a session as the lock. A PAKE / in-channel
-  proof removes the offline-crackable MD5 from the wire, and the slow salted KDF
-  removes the fast unsalted hash at rest.
+  pinned key"), so it cannot complete a session as the lock. The in-channel
+  challenge-response removes the offline-crackable MD5 from the wire, and the slow
+  salted KDF removes the fast unsalted hash at rest.
 
 ### Stage 3 - Keying  (defeats A3 keying recovery)
 - **Mechanism.** A **fresh ephemeral** Diffie-Hellman exchange over the RFC 3526
@@ -122,7 +138,7 @@ and must therefore never expose a guessable function of the PIN.
   3.                              <----------  CERT  name, pubkey, sig
         [AUTH] verify pubkey == PINNED key,
                verify sig over (name|pubkey)        <-- defeats A2
-  4. PAIR  proof-of-PIN (PAKE / in-channel, not raw MD5)  -------------------->
+  4. PAIR  PIN proof: challenge-response Hash(PIN,nonce), inside AEAD channel  ->
                                                  verify PIN proof   <-- fixes PIN
   5.                              <----  DH  B = g^b mod p (2048-bit, EPHEMERAL),
                                              sig over transcript (offered|suite|B)

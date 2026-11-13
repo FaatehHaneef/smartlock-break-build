@@ -35,9 +35,9 @@
   <text x="470" y="286" text-anchor="middle" font-size="11" font-style="italic" fill="#4C78A8">[AUTH] hub checks pubkey == pinned key AND cert signature &#8594; defeats A2 (impersonation)</text>
 
   <!-- 4 PAIR hub->lock -->
-  <text x="470" y="318" text-anchor="middle" font-size="12" fill="#333">4. PAIR  proof-of-PIN (PAKE / in-channel, never a bare MD5)</text>
+  <text x="470" y="318" text-anchor="middle" font-size="12" fill="#333">4. PAIR  PIN proof: challenge-response Hash(PIN, nonce), inside the AEAD channel (never a bare MD5)</text>
   <line x1="208" y1="326" x2="732" y2="326" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
-  <text x="470" y="342" text-anchor="middle" font-size="11" font-style="italic" fill="#E4572E">[PIN] nothing offline-guessable on the wire; stored with a salted slow KDF at rest</text>
+  <text x="470" y="342" text-anchor="middle" font-size="11" font-style="italic" fill="#E4572E">[PIN] fresh nonce stops replay; sent only under the session key so nothing is offline-guessable; salted slow KDF at rest</text>
 
   <!-- 5 DH lock->hub -->
   <text x="470" y="374" text-anchor="middle" font-size="12" fill="#333">5. DH  B = g^b mod p  (2048-bit, EPHEMERAL) + sig over (offered | suite | B)</text>
