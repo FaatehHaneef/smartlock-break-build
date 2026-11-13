@@ -1,0 +1,23 @@
+Check 1: suite policy never selects NULL, never downgrades
+  [PASS] strong_suites() excludes NULL
+  [PASS] NULL-only offer is aborted ("")
+  [PASS] picks strongest common (AES256 over AES128/NULL)
+  [PASS] falls to AES128 only when AES256 absent
+  [PASS] choose_suite never returns NULL
+Check 2: key derived via KDF, not the raw secret
+  [PASS] key length matches suite (32)
+  [PASS] key != raw shared secret prefix
+  [PASS] KDF is deterministic
+  [PASS] per-direction keys differ (c2s != s2c)
+Check 3: unique nonce per sequence number
+  [PASS] nonce length is 12
+  [PASS] make_nonce(i) distinct across many i
+Check 4: AEAD seals and opens a record correctly
+  [PASS] round-trip seal/open at matching seqno
+Check 5: replay / out-of-order / tamper are rejected
+  [PASS] open at wrong expected seqno throws
+  [PASS] tampered record throws
+  [PASS] altered seqno header is rejected
+Check 6: source scan is verified separately on the .cpp (contains "hkdf"/"evp_kdf", no forbidden tokens).
+
+ALL CHECKS PASSED (0 failures)

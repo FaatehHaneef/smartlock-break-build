@@ -1,0 +1,8 @@
+[capture] located captured UNLOCK record; replaying 3 time(s) to 127.0.0.1:9377
+
+[replay 1] lock accepted the replayed UNLOCK -> "DOOR OPENED (unlock #1)"
+[replay 2] lock accepted the replayed UNLOCK -> "DOOR OPENED (unlock #2)"
+[replay 3] lock accepted the replayed UNLOCK -> "DOOR OPENED (unlock #3)"
+
+[result] the captured UNLOCK opened the door on every replay; the
+         unlock counter climbed with no fresh authentication.

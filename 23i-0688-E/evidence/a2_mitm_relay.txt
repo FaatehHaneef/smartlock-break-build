@@ -1,0 +1,14 @@
+[mitm] listening on 9999, real lock at 127.0.0.1:9377
+[mitm] real lock identity: smartlock-23i-0688.local ; we will impersonate it
+[mitm] two independent key exchanges completed:
+       key with hub  = 000000000000000000000000000000000000000000000000000000b9ddb5295c
+       key with lock = 0000000000000000000000000000000000000000000000000000005b04dbd501
+[mitm read  lock->hub] Paired with SmartLock. Pairing secret: FLAG{4b9489d8c219ed28}
+[mitm read  hub->lock] STATUS
+[mitm read  lock->hub] STATE LOCKED unlocks=3
+[mitm read  hub->lock] UNLOCK
+[mitm read  lock->hub] DOOR OPENED (unlock #4)
+[mitm read  hub->lock] LOCK
+[mitm read  lock->hub] DOOR LOCKED
+[mitm read  hub->lock] QUIT
+[mitm] relayed the whole session; the hub believed it spoke to the lock.

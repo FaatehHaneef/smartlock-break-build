@@ -1,0 +1,8 @@
+[downgrade-relay] listening on 9999 -> 127.0.0.1:9377; rewriting HELLO to offer only NULL
+[downgrade] rewrote hub HELLO -> offers only NULL
+[downgrade] lock accepted suite: NULL
+[CLEARTEXT record] Paired with SmartLock. Pairing secret: FLAG{4b9489d8c219ed28}
+[CLEARTEXT record] STATE LOCKED unlocks=2
+[CLEARTEXT record] DOOR OPENED (unlock #3)
+[CLEARTEXT record] DOOR LOCKED
+[downgrade-relay] done (rewrote HELLO: yes)
