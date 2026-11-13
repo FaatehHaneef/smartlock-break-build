@@ -1,63 +1,61 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="840" height="370" viewBox="0 0 840 370" font-family="Segoe UI, Arial, sans-serif">
-  <rect x="0" y="0" width="840" height="370" fill="#ffffff"/>
-  <text x="420" y="26" text-anchor="middle" font-size="17" font-weight="bold" fill="#222">SmartLock v1 vs v2 - cost of security (roll 23i-0688)</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="420" viewBox="0 0 880 420" font-family="Segoe UI, Arial, sans-serif">
+  <rect x="0" y="0" width="880" height="420" fill="#ffffff"/>
+  <text x="440" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">SmartLock v1 vs v2 - cost of security (roll 23i-0688)</text>
 
   <!-- legend -->
-  <rect x="300" y="38" width="14" height="14" fill="#4C78A8"/>
-  <text x="320" y="50" font-size="13" fill="#333">v1 (AES256-GCM)</text>
-  <rect x="440" y="38" width="14" height="14" fill="#F58518"/>
-  <text x="460" y="50" font-size="13" fill="#333">v2</text>
+  <rect x="300" y="42" width="14" height="14" fill="#4C78A8"/>
+  <text x="320" y="54" font-size="13" fill="#333">v1 (AES256-GCM)</text>
+  <rect x="452" y="42" width="14" height="14" fill="#F58518"/>
+  <text x="472" y="54" font-size="13" fill="#333">v2</text>
 
-  <!-- ================= Panel A: handshake time ================= -->
-  <text x="220" y="78" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Handshake time (ms, 30 runs)</text>
-  <!-- grid + y ticks: 0,1,2,3 ms ; baseline y=300, scale 78.125 px/ms -->
-  <line x1="70" y1="300" x2="370" y2="300" stroke="#999" stroke-width="1"/>
-  <line x1="70" y1="300" x2="70" y2="90" stroke="#999" stroke-width="1"/>
+  <!-- ===================== Panel A: handshake ===================== -->
+  <text x="220" y="86" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Handshake time (ms, 30 runs)</text>
+  <line x1="70" y1="360" x2="370" y2="360" stroke="#999" stroke-width="1"/>
+  <line x1="70" y1="360" x2="70" y2="110" stroke="#999" stroke-width="1"/>
   <g font-size="11" fill="#777">
-    <line x1="67" y1="300" x2="370" y2="300" stroke="#eee"/><text x="62" y="304" text-anchor="end">0</text>
-    <line x1="67" y1="222" x2="370" y2="222" stroke="#eee"/><text x="62" y="226" text-anchor="end">1</text>
-    <line x1="67" y1="144" x2="370" y2="144" stroke="#eee"/><text x="62" y="148" text-anchor="end">2</text>
-    <line x1="67" y1="66"  x2="370" y2="66"  stroke="#eee"/><text x="62" y="70"  text-anchor="end">3</text>
+    <line x1="67" y1="360" x2="370" y2="360" stroke="#eee"/><text x="62" y="364" text-anchor="end">0</text>
+    <line x1="67" y1="282" x2="370" y2="282" stroke="#eee"/><text x="62" y="286" text-anchor="end">1</text>
+    <line x1="67" y1="204" x2="370" y2="204" stroke="#eee"/><text x="62" y="208" text-anchor="end">2</text>
+    <line x1="67" y1="126" x2="370" y2="126" stroke="#eee"/><text x="62" y="130" text-anchor="end">3</text>
   </g>
-  <!-- v1 bar: 1.41 ms -->
-  <rect x="125" y="190" width="70" height="110" fill="#4C78A8"/>
-  <line x1="160" y1="152" x2="160" y2="228" stroke="#333" stroke-width="1.5"/>
-  <line x1="150" y1="152" x2="170" y2="152" stroke="#333" stroke-width="1.5"/>
-  <line x1="150" y1="228" x2="170" y2="228" stroke="#333" stroke-width="1.5"/>
-  <text x="160" y="182" text-anchor="middle" font-size="12" fill="#222">1.41</text>
-  <text x="160" y="316" text-anchor="middle" font-size="12" fill="#333">v1</text>
-  <!-- v2 bar: 2.61 ms -->
-  <rect x="245" y="96" width="70" height="204" fill="#F58518"/>
-  <line x1="280" y1="52" x2="280" y2="140" stroke="#333" stroke-width="1.5"/>
-  <line x1="270" y1="52" x2="290" y2="52" stroke="#333" stroke-width="1.5"/>
-  <line x1="270" y1="140" x2="290" y2="140" stroke="#333" stroke-width="1.5"/>
-  <text x="280" y="88" text-anchor="middle" font-size="12" fill="#222">2.61</text>
-  <text x="280" y="316" text-anchor="middle" font-size="12" fill="#333">v2</text>
+  <!-- v1 bar: 1.41 -->
+  <rect x="125" y="250" width="70" height="110" fill="#4C78A8"/>
+  <line x1="160" y1="212" x2="160" y2="288" stroke="#333" stroke-width="1.5"/>
+  <line x1="151" y1="212" x2="169" y2="212" stroke="#333" stroke-width="1.5"/>
+  <line x1="151" y1="288" x2="169" y2="288" stroke="#333" stroke-width="1.5"/>
+  <text x="160" y="242" text-anchor="middle" font-size="12" fill="#222">1.41</text>
+  <text x="160" y="378" text-anchor="middle" font-size="12" fill="#333">v1</text>
+  <!-- v2 bar: 2.61 -->
+  <rect x="245" y="156" width="70" height="204" fill="#F58518"/>
+  <line x1="280" y1="112" x2="280" y2="200" stroke="#333" stroke-width="1.5"/>
+  <line x1="271" y1="112" x2="289" y2="112" stroke="#333" stroke-width="1.5"/>
+  <line x1="271" y1="200" x2="289" y2="200" stroke="#333" stroke-width="1.5"/>
+  <text x="280" y="148" text-anchor="middle" font-size="12" fill="#222">2.61</text>
+  <text x="280" y="378" text-anchor="middle" font-size="12" fill="#333">v2</text>
 
-  <!-- ================= Panel B: throughput ================= -->
-  <text x="630" y="78" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Record throughput (MB/s, 1 KiB)</text>
-  <!-- baseline y=300, scale 0.2083 px per MB/s; ticks 0,300,600,900,1200 -->
-  <line x1="470" y1="300" x2="810" y2="300" stroke="#999" stroke-width="1"/>
-  <line x1="470" y1="300" x2="470" y2="90" stroke="#999" stroke-width="1"/>
+  <!-- ===================== Panel B: throughput ===================== -->
+  <text x="640" y="86" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Record throughput (MB/s, 1 KiB)</text>
+  <line x1="470" y1="360" x2="810" y2="360" stroke="#999" stroke-width="1"/>
+  <line x1="470" y1="360" x2="470" y2="110" stroke="#999" stroke-width="1"/>
   <g font-size="11" fill="#777">
-    <line x1="467" y1="300" x2="810" y2="300" stroke="#eee"/><text x="462" y="304" text-anchor="end">0</text>
-    <line x1="467" y1="237" x2="810" y2="237" stroke="#eee"/><text x="462" y="241" text-anchor="end">300</text>
-    <line x1="467" y1="175" x2="810" y2="175" stroke="#eee"/><text x="462" y="179" text-anchor="end">600</text>
-    <line x1="467" y1="112" x2="810" y2="112" stroke="#eee"/><text x="462" y="116" text-anchor="end">900</text>
-    <line x1="467" y1="50"  x2="810" y2="50"  stroke="#eee"/><text x="462" y="54"  text-anchor="end">1200</text>
+    <line x1="467" y1="360" x2="810" y2="360" stroke="#eee"/><text x="462" y="364" text-anchor="end">0</text>
+    <line x1="467" y1="298" x2="810" y2="298" stroke="#eee"/><text x="462" y="302" text-anchor="end">300</text>
+    <line x1="467" y1="235" x2="810" y2="235" stroke="#eee"/><text x="462" y="239" text-anchor="end">600</text>
+    <line x1="467" y1="172" x2="810" y2="172" stroke="#eee"/><text x="462" y="176" text-anchor="end">900</text>
+    <line x1="467" y1="110" x2="810" y2="110" stroke="#eee"/><text x="462" y="114" text-anchor="end">1200</text>
   </g>
   <!-- seal group -->
-  <rect x="505" y="69"  width="50" height="231" fill="#4C78A8"/>
-  <text x="530" y="63" text-anchor="middle" font-size="11" fill="#222">1110</text>
-  <rect x="560" y="104" width="50" height="196" fill="#F58518"/>
-  <text x="585" y="98" text-anchor="middle" font-size="11" fill="#222">941</text>
-  <text x="557" y="316" text-anchor="middle" font-size="12" fill="#333">seal</text>
+  <rect x="505" y="129" width="46" height="231" fill="#4C78A8"/>
+  <text x="528" y="123" text-anchor="middle" font-size="11" fill="#222">1110</text>
+  <rect x="557" y="164" width="46" height="196" fill="#F58518"/>
+  <text x="580" y="158" text-anchor="middle" font-size="11" fill="#222">941</text>
+  <text x="554" y="378" text-anchor="middle" font-size="12" fill="#333">seal</text>
   <!-- open group -->
-  <rect x="685" y="123" width="50" height="177" fill="#4C78A8"/>
-  <text x="710" y="117" text-anchor="middle" font-size="11" fill="#222">852</text>
-  <rect x="740" y="128" width="50" height="172" fill="#F58518"/>
-  <text x="765" y="122" text-anchor="middle" font-size="11" fill="#222">827</text>
-  <text x="737" y="316" text-anchor="middle" font-size="12" fill="#333">open</text>
+  <rect x="680" y="183" width="46" height="177" fill="#4C78A8"/>
+  <text x="703" y="177" text-anchor="middle" font-size="11" fill="#222">852</text>
+  <rect x="732" y="188" width="46" height="172" fill="#F58518"/>
+  <text x="755" y="182" text-anchor="middle" font-size="11" fill="#222">827</text>
+  <text x="729" y="378" text-anchor="middle" font-size="12" fill="#333">open</text>
 
-  <text x="420" y="352" text-anchor="middle" font-size="11" fill="#777">i7-11800H, g++ -O2, OpenSSL 3.0.13. Whiskers on panel A are +/- 1 s.d. over 30 runs.</text>
+  <text x="440" y="405" text-anchor="middle" font-size="11" fill="#777">i7-11800H, g++ -O2, OpenSSL 3.0.13. Whiskers on panel A are +/- 1 s.d. over 30 runs.</text>
 </svg>
