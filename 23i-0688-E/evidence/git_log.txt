@@ -1,0 +1,403 @@
+commit 64d347b8aff7b84ac4b40010e7b5bde246895122
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Fri Nov 13 20:20:57 2026 +0500
+
+    Fix performance chart layout (title/bar overlap) and dash; rebuild report
+
+ 23i-0688-E/23i-0688-E-REPORT.pdf                   | Bin 1080697 -> 1070952 bytes
+ .../performance/23i-0688-E-performance-chart.svg   | 100 ++++++++++-----------
+ 23i-0688-E/performance/perf-chart.png              | Bin 48954 -> 34555 bytes
+ 3 files changed, 49 insertions(+), 51 deletions(-)
+
+commit 719ee35e2d8f18e77e8ae01d43d5ba1d9a7f84d7
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Fri Nov 13 20:17:13 2026 +0500
+
+    Use user's AI-audit wording; remove PIN-mechanism/PAKE references
+
+ 23i-0688-E/23i-0688-E-REPORT.pdf | Bin 1085726 -> 1080697 bytes
+ PROGRESS.md                      |   9 +++++----
+ report/23i-0688-E-REPORT.tex     |  42 ++++++++++++++++++---------------------
+ report/PartB-design.md           |   4 +---
+ 4 files changed, 25 insertions(+), 30 deletions(-)
+
+commit e05eee9a9b462057596d34f91f4fd83b944c9ae1
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Fri Nov 13 20:07:42 2026 +0500
+
+    Rework report title page, move build commands to a section, remove dashes
+
+ 23i-0688-E/23i-0688-E-REPORT.pdf | Bin 1077647 -> 1085726 bytes
+ report/23i-0688-E-REPORT.tex     |  92 +++++++++++++++++++++------------------
+ 2 files changed, 50 insertions(+), 42 deletions(-)
+
+commit ff35b7dc9699477f43c37e77027032184a4b8c65
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Fri Nov 13 19:59:47 2026 +0500
+
+    Update handoff: report compiled, Kali evidence + README done
+
+ PROGRESS.md | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
+
+commit c301386090c36743f1966db68c3bb60cb119d586
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Fri Nov 13 19:59:16 2026 +0500
+
+    Add final report (LaTeX source + compiled REPORT.pdf) and perf chart PNG
+
+ .gitignore                            |   7 +
+ 23i-0688-E/23i-0688-E-REPORT.pdf      | Bin 0 -> 1077647 bytes
+ 23i-0688-E/performance/perf-chart.png | Bin 0 -> 48954 bytes
+ report/23i-0688-E-REPORT.tex          | 376 ++++++++++++++++++++++++++++++++++
+ 4 files changed, 383 insertions(+)
+
+commit ef9ff170bf0d63e09c11fe9c50bc40cdf974bb13
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Fri Nov 13 19:51:22 2026 +0500
+
+    Add portfolio README with cover banner and handshake diagram
+
+ README.md        | 134 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ report/cover.png | Bin 0 -> 82741 bytes
+ report/cover.svg |  50 +++++++++++++++++++++
+ 3 files changed, 184 insertions(+)
+
+commit 39057dbc2d0cd9e9089172453424858ef1ba7f07
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Fri Nov 13 19:40:28 2026 +0500
+
+    Redesign v2 handshake diagram: stage lanes, icons, pills, legend (SVG + PNG)
+
+ report/v2-handshake.png | Bin 0 -> 190486 bytes
+ report/v2-handshake.svg | 181 +++++++++++++++++++++++++++++-------------------
+ 2 files changed, 111 insertions(+), 70 deletions(-)
+
+commit d04662e1ac6a6b1cbc4fa88ce5124d7ada445d85
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Fri Nov 13 19:07:10 2026 +0500
+
+    Align Part B PIN fix to taught concepts (in-channel challenge-response, not PAKE)
+
+ report/PartB-design.md  | 36 ++++++++++++++++++++++++++----------
+ report/v2-handshake.svg |  4 ++--
+ 2 files changed, 28 insertions(+), 12 deletions(-)
+
+commit 01554c255388d956224e9b2e9859737427b504ad
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Fri Nov 13 19:02:30 2026 +0500
+
+    Add vector (SVG) v2 handshake diagram for report/README
+
+ report/v2-handshake.svg | 75 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 75 insertions(+)
+
+commit bde3b8954af9e5f3dc55e9e0c772c4ebcea6909a
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Fri Nov 13 18:58:12 2026 +0500
+
+    Draft Part B design spec (threat model, per-stage mechanisms, handshake diagram)
+
+ report/PartB-design.md | 148 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 148 insertions(+)
+
+commit 2cac9db0bb690edf302a5ac85a83d1b6d5776acb
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Fri Nov 13 18:56:43 2026 +0500
+
+    Add Wireshark Follow-TCP-Stream screenshot of v1 downgrade
+
+ 23i-0688-E/evidence/shot_v1_downgrade_stream.png | Bin 0 -> 392151 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit c5b743d685e23b9d8f01ed0d65dd87c473343eb1
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Fri Nov 13 18:55:34 2026 +0500
+
+    Add Wireshark Follow-TCP-Stream screenshot of v1 normal session
+
+ 23i-0688-E/evidence/shot_v1_normal_stream.png | Bin 0 -> 467649 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 4c369a074bc4c80a1b289454a8e626f0942c4db5
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Fri Nov 13 18:49:08 2026 +0500
+
+    Add Kali packet captures and tool output (Part A + C.2 evidence)
+
+ 23i-0688-E/evidence/a1_downgrade_relay.txt   |   8 +++++
+ 23i-0688-E/evidence/a2_mitm_relay.txt        |  14 ++++++++
+ 23i-0688-E/evidence/a5_replay.txt            |   8 +++++
+ 23i-0688-E/evidence/c2_v2_downgrade.txt      |   0
+ 23i-0688-E/evidence/c2_v2_impersonation.txt  |   1 +
+ 23i-0688-E/evidence/cap_v1_downgrade.pcap    | Bin 0 -> 7800 bytes
+ 23i-0688-E/evidence/cap_v1_mitm.pcap         | Bin 0 -> 7243 bytes
+ 23i-0688-E/evidence/cap_v1_normal.pcap       | Bin 0 -> 4185 bytes
+ 23i-0688-E/evidence/cap_v1_normal.transcript |  14 ++++++++
+ 23i-0688-E/evidence/cap_v1_replay.pcap       | Bin 0 -> 14020 bytes
+ 23i-0688-E/evidence/cap_v2_normal.pcap       | Bin 0 -> 5566 bytes
+ 23i-0688-E/evidence/stream_v1_normal.txt     |  49 +++++++++++++++++++++++++++
+ 23i-0688-E/evidence/v2_selftest_kali.txt     |  23 +++++++++++++
+ 13 files changed, 117 insertions(+)
+
+commit 7a7ebfc19c3a4b7bc297d2b40774f6900a93096d
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Fri Nov 13 18:16:08 2026 +0500
+
+    Add Kali evidence runbook (captures + screenshots)
+
+ KALI_RUNBOOK.md | 188 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 188 insertions(+)
+
+commit ee75bc5d721a33717438a371339b6ab10f6db1dd
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:38:06 2026 +0500
+
+    Add progress/handoff note for resuming
+
+ PROGRESS.md | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+
+commit 9c45f3b9073758fa15ca007837753831194e2e8d
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:33:57 2026 +0500
+
+    Fill in README build/run instructions for all parts
+
+ 23i-0688-E/README.txt | 95 +++++++++++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 80 insertions(+), 15 deletions(-)
+
+commit 2ca74fd9161e8b111a77226d7e291c35ecd8a441
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:33:14 2026 +0500
+
+    Add Part D results summary and v1-vs-v2 comparison chart
+
+ .../performance/23i-0688-E-performance-chart.svg   | 63 ++++++++++++++++++++++
+ 23i-0688-E/performance/perf_results.md             | 37 +++++++++++++
+ 2 files changed, 100 insertions(+)
+
+commit 68f75d4e13716ac4a3e3d4bf3ad6f7db79a1b374
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:33:13 2026 +0500
+
+    Add Part D raw benchmark data (CSV)
+
+ 23i-0688-E/performance/taskd_records.csv      |  5 +++++
+ 23i-0688-E/performance/taskd_v1_handshake.csv | 31 +++++++++++++++++++++++++++
+ 23i-0688-E/performance/taskd_v2_handshake.csv | 31 +++++++++++++++++++++++++++
+ 3 files changed, 67 insertions(+)
+
+commit 411d5b5d000f6965a18882be04e25902c37705c3
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:33:13 2026 +0500
+
+    Add TASKD performance harness (record benchmarks + handshake timing)
+
+ .gitignore                                     |   1 +
+ 23i-0688-E/performance/23i-0688-E-TASKD-V1.cpp | 187 +++++++++++++++++++++++++
+ 2 files changed, 188 insertions(+)
+
+commit 2b18cc96ab10188343fc7727c66abe86dad2fc94
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:26:36 2026 +0500
+
+    Add C.2 evidence: keying/nonce/replay no longer applicable in v2
+
+ 23i-0688-E/evidence/c2_A3_A4_not_applicable.txt | 19 +++++++++++++++++++
+ 23i-0688-E/evidence/c2_A5_replay_rejected.txt   | 25 +++++++++++++++++++++++++
+ 2 files changed, 44 insertions(+)
+
+commit de7841d97e06019d36edc9db25800b48e7cd27e7
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:26:36 2026 +0500
+
+    Add C.2 evidence: v2 session capture and downgrade/impersonation blocked
+
+ 23i-0688-E/evidence/c2_A1_downgrade_blocked.txt     |  3 +++
+ 23i-0688-E/evidence/c2_A2_impersonation_blocked.txt |  3 +++
+ 23i-0688-E/evidence/v2_session.transcript           | 14 ++++++++++++++
+ 3 files changed, 20 insertions(+)
+
+commit 2ea21b1e9f58c4e4866923de28676654488ab70d
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:23:17 2026 +0500
+
+    Copy finished securelink2.cpp into submission folder
+
+ 23i-0688-E/securelink2.cpp | 159 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 159 insertions(+)
+
+commit 554be84c1204455cd557c6bda1e4f66abc8d1efa
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:23:17 2026 +0500
+
+    Add v2 six-check self-test and its passing output
+
+ 23i-0688-E/evidence/v2_selfcheck_output.txt    | 23 +++++++
+ SmartLock/v2_skeleton/securelink2_selftest.cpp | 83 ++++++++++++++++++++++++++
+ 2 files changed, 106 insertions(+)
+
+commit 61ecfa1f4e5bb86a06dc2d3f690d7bf1b95131a3
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:23:17 2026 +0500
+
+    Implement securelink2.cpp: HKDF keys, per-record nonce, seq-bound AES-GCM
+
+ SmartLock/v2_skeleton/securelink2.cpp | 157 ++++++++++++++++++++++++++++------
+ 1 file changed, 133 insertions(+), 24 deletions(-)
+
+commit 68e80f9478ffd6c1ed87484f857dacf1bed8bf06
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:17:48 2026 +0500
+
+    Add TASKA2 impersonation/MITM relay (impostor cert, two key exchanges)
+
+ 23i-0688-E/exploits/23i-0688-E-TASKA2-V1.cpp | 148 +++++++++++++++++++++++++++
+ 1 file changed, 148 insertions(+)
+
+commit 5c4cda44fa0ff0037c93c9c30f87b1c2b802248e
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:17:47 2026 +0500
+
+    Add TASKA1 downgrade relay (forces NULL, greeting in cleartext)
+
+ 23i-0688-E/exploits/23i-0688-E-TASKA1-V1.cpp | 105 +++++++++++++++++++++++++++
+ 1 file changed, 105 insertions(+)
+
+commit 08eb896bb35823c9006829b39c44693cc246210c
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:11:03 2026 +0500
+
+    Record cracked PIN in answers.txt (Part A.1 complete)
+
+ 23i-0688-E/answers.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit dafec5b025c61510ea7afe794596bf4a99d2f690
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:11:03 2026 +0500
+
+    Add PIN-recovery cracker (C++ + hashcat command reference)
+
+ .gitignore                                         |  1 +
+ .../exploits/23i-0688-E-pincrack-hashcat.txt       | 27 ++++++++++
+ 23i-0688-E/exploits/23i-0688-E-pincrack.cpp        | 61 ++++++++++++++++++++++
+ 3 files changed, 89 insertions(+)
+
+commit 9429cfbad20178b4aba15ccc6c5bc5ef29800650
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:10:14 2026 +0500
+
+    Add TASKA5 replay exploit (captured UNLOCK reopens the lock)
+
+ 23i-0688-E/exploits/23i-0688-E-TASKA5-V1.cpp | 122 +++++++++++++++++++++++++++
+ 1 file changed, 122 insertions(+)
+
+commit 5d536e5779a3bb40355eb4b7df2232b224b50887
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:07:37 2026 +0500
+
+    Record recovered nonce-reuse XOR (A4) in answers.txt
+
+ 23i-0688-E/answers.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit fd9762d6325e45c524f2865e3b040e4aad1a48ff
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:07:37 2026 +0500
+
+    Add TASKA4 nonce-reuse exploit (two-time pad, no key)
+
+ 23i-0688-E/exploits/23i-0688-E-TASKA4-V1.cpp | 77 ++++++++++++++++++++++++++++
+ 1 file changed, 77 insertions(+)
+
+commit 70693101cbb0566e5d05f89288f6ac501e5a1afc
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:03:38 2026 +0500
+
+    Record recovered flag and DH exponent (A3) in answers.txt
+
+ 23i-0688-E/answers.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 51a3a8319440bf2ea063c3e6cfdd056ae8a7f21a
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:03:38 2026 +0500
+
+    Add TASKA3 keying-recovery exploit and captured session transcript
+
+ 23i-0688-E/evidence/keying_session.transcript | 14 ++++++
+ 23i-0688-E/exploits/23i-0688-E-TASKA3-V1.cpp  | 71 +++++++++++++++++++++++++++
+ 2 files changed, 85 insertions(+)
+
+commit c9fadc9205cd3a631b27ec3c98b8501d9e708edf
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:03:38 2026 +0500
+
+    Add Part A shared helpers: discrete log, AES-GCM, transcript parsing
+
+ 23i-0688-E/exploits/23i-0688-E-TASKA-common.hpp | 164 ++++++++++++++++++++++++
+ 1 file changed, 164 insertions(+)
+
+commit 3f3a42485ad74235a271185e4ed98b91ba3e9092
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 19:03:37 2026 +0500
+
+    Add passive wiretap capture tool (Part A dev aid)
+
+ .gitignore        |  3 ++
+ tools/wiretap.cpp | 84 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 87 insertions(+)
+
+commit d9b9f3f26650555d6e4606f3ba1d6c588dd21a0f
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 18:55:15 2026 +0500
+
+    Scaffold 23i-0688-E submission package (answers, README, dirs)
+
+ 23i-0688-E/README.txt           | 26 ++++++++++++++++++++++++++
+ 23i-0688-E/answers.txt          | 10 ++++++++++
+ 23i-0688-E/evidence/.gitkeep    |  0
+ 23i-0688-E/performance/.gitkeep |  0
+ 4 files changed, 36 insertions(+)
+
+commit a27facbf66a43aad633bb4e59d72a1468d747311
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 18:55:14 2026 +0500
+
+    Organize assignment documents into docs/
+
+ docs/Appendix.pdf              | Bin 0 -> 143812 bytes
+ docs/Assignment2_Statement.pdf | Bin 0 -> 222755 bytes
+ docs/FUNCTIONALITY.pdf         | Bin 0 -> 152317 bytes
+ docs/Lab_Setup_Guide.pdf       | Bin 0 -> 137759 bytes
+ 4 files changed, 0 insertions(+), 0 deletions(-)
+
+commit c14209c873f9579ddbe1fe63e64a03b2da3f0f95
+Author: FaatehHaneef <faatehsyyed@users.noreply.github.com>
+Date:   Tue Nov 10 18:55:14 2026 +0500
+
+    Add provided SmartLock v1 source and v2 skeleton
+
+ .gitignore                                 |  29 +++++
+ SmartLock/BUILD.md                         |  54 +++++++++
+ SmartLock/answers_template.txt             |   8 ++
+ SmartLock/smartlock/Makefile               |  19 +++
+ SmartLock/smartlock/hub_client.cpp         |  57 +++++++++
+ SmartLock/smartlock/instance_generator.cpp |  75 ++++++++++++
+ SmartLock/smartlock/lock_server.cpp        | 103 +++++++++++++++++
+ SmartLock/smartlock/pin_wordlist.txt       |  86 ++++++++++++++
+ SmartLock/smartlock/pki.hpp                |  38 ++++++
+ SmartLock/smartlock/secrets.hpp            |  84 ++++++++++++++
+ SmartLock/smartlock/slink.hpp              | 179 +++++++++++++++++++++++++++++
+ SmartLock/v2_skeleton/Makefile             |  21 ++++
+ SmartLock/v2_skeleton/README.md            |  83 +++++++++++++
+ SmartLock/v2_skeleton/dh2048.hpp           |  48 ++++++++
+ SmartLock/v2_skeleton/hub_client2.cpp      |  93 +++++++++++++++
+ SmartLock/v2_skeleton/lock_server2.cpp     | 114 ++++++++++++++++++
+ SmartLock/v2_skeleton/pki.hpp              |  38 ++++++
+ SmartLock/v2_skeleton/securelink2.cpp      |  50 ++++++++
+ SmartLock/v2_skeleton/securelink2.hpp      |  39 +++++++
+ SmartLock/v2_skeleton/slink.hpp            | 179 +++++++++++++++++++++++++++++
+ 20 files changed, 1397 insertions(+)
