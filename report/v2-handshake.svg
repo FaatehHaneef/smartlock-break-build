@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="780" viewBox="0 0 940 780" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#333"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="940" height="780" fill="#ffffff"/>
+  <text x="470" y="34" text-anchor="middle" font-size="19" font-weight="bold" fill="#1f2a37">SmartLock v2 handshake (roll 23i-0688)</text>
+  <text x="470" y="54" text-anchor="middle" font-size="12" fill="#6b7280">authenticated key exchange, HKDF keys, unique-nonce AEAD, sequence-bound records</text>
+
+  <!-- actor headers -->
+  <rect x="120" y="70" width="170" height="40" rx="6" fill="#4C78A8"/>
+  <text x="205" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">HUB (client)</text>
+  <text x="205" y="128" text-anchor="middle" font-size="10.5" fill="#6b7280">pins lock's RSA public key</text>
+  <rect x="650" y="70" width="170" height="40" rx="6" fill="#E4572E"/>
+  <text x="735" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">LOCK (server)</text>
+  <text x="735" y="128" text-anchor="middle" font-size="10.5" fill="#6b7280">holds RSA private key, PIN-KDF</text>
+
+  <!-- lifelines -->
+  <line x1="205" y1="140" x2="205" y2="748" stroke="#9aa5b1" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <line x1="735" y1="140" x2="735" y2="748" stroke="#9aa5b1" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+  <!-- 1 HELLO hub->lock -->
+  <text x="470" y="166" text-anchor="middle" font-size="12" fill="#333">1. HELLO  suites = {AES256-GCM, AES128-GCM}  (no NULL)</text>
+  <line x1="208" y1="174" x2="732" y2="174" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
+  <text x="470" y="190" text-anchor="middle" font-size="11" font-style="italic" fill="#2E8B57">lock picks strongest common suite; aborts if none &#8594; defeats A1 (no NULL to downgrade to)</text>
+
+  <!-- 2 SUITE lock->hub -->
+  <text x="470" y="222" text-anchor="middle" font-size="12" fill="#333">2. SUITE  suite</text>
+  <line x1="732" y1="230" x2="208" y2="230" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
+
+  <!-- 3 CERT lock->hub -->
+  <text x="470" y="262" text-anchor="middle" font-size="12" fill="#333">3. CERT  name, pubkey, sig</text>
+  <line x1="732" y1="270" x2="208" y2="270" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
+  <text x="470" y="286" text-anchor="middle" font-size="11" font-style="italic" fill="#4C78A8">[AUTH] hub checks pubkey == pinned key AND cert signature &#8594; defeats A2 (impersonation)</text>
+
+  <!-- 4 PAIR hub->lock -->
+  <text x="470" y="318" text-anchor="middle" font-size="12" fill="#333">4. PAIR  proof-of-PIN (PAKE / in-channel, never a bare MD5)</text>
+  <line x1="208" y1="326" x2="732" y2="326" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
+  <text x="470" y="342" text-anchor="middle" font-size="11" font-style="italic" fill="#E4572E">[PIN] nothing offline-guessable on the wire; stored with a salted slow KDF at rest</text>
+
+  <!-- 5 DH lock->hub -->
+  <text x="470" y="374" text-anchor="middle" font-size="12" fill="#333">5. DH  B = g^b mod p  (2048-bit, EPHEMERAL) + sig over (offered | suite | B)</text>
+  <line x1="732" y1="382" x2="208" y2="382" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
+  <text x="470" y="398" text-anchor="middle" font-size="11" font-style="italic" fill="#4C78A8">[AUTH-KEX] hub verifies signature &#8594; binds the negotiation (A1) and authenticates the DH value (A2)</text>
+
+  <!-- 6 DHCLIENT hub->lock -->
+  <text x="470" y="430" text-anchor="middle" font-size="12" fill="#333">6. DHCLIENT  A = g^a mod p  (2048-bit, ephemeral)</text>
+  <line x1="208" y1="438" x2="732" y2="438" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
+  <text x="470" y="454" text-anchor="middle" font-size="11" font-style="italic" fill="#2E8B57">[KDF] shared = g^(ab); k_c2s = HKDF(shared,"c2s"), k_s2c = HKDF(shared,"s2c") &#8594; defeats A3 + forward secrecy</text>
+
+  <!-- records band -->
+  <rect x="95" y="474" width="750" height="250" rx="8" fill="#f5f7fa" stroke="#dbe2ea"/>
+  <text x="470" y="494" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#475569">encrypted records - AES-GCM AEAD, unique nonce per record, per-direction keys</text>
+
+  <!-- 7 greeting lock->hub -->
+  <text x="470" y="524" text-anchor="middle" font-size="12" fill="#333">7. MSG  rec = seal(k_s2c, seq=0, greeting with flag)</text>
+  <line x1="732" y1="532" x2="208" y2="532" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
+  <text x="470" y="548" text-anchor="middle" font-size="11" font-style="italic" fill="#F58518">[NONCE] nonce = f(seq); no (key,nonce) reuse &#8594; defeats A4 (two-time pad)</text>
+
+  <!-- 8 STATUS hub->lock -->
+  <text x="470" y="580" text-anchor="middle" font-size="12" fill="#333">8. MSG  rec = seal(k_c2s, seq=0, "STATUS")</text>
+  <line x1="208" y1="588" x2="732" y2="588" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
+  <text x="470" y="604" text-anchor="middle" font-size="11" font-style="italic" fill="#7B5EA7">[SEQ] seq bound as AAD; open_record rejects wrong seq &#8594; defeats A5 (replay / reorder)</text>
+
+  <text x="470" y="632" text-anchor="middle" font-size="11" fill="#6b7280">... each record: sequence number increments per direction; tamper fails the GCM tag ...</text>
+
+  <!-- 9 QUIT -->
+  <text x="470" y="664" text-anchor="middle" font-size="12" fill="#333">9. MSG  rec = seal(k_c2s, seq=n, "QUIT")</text>
+  <line x1="208" y1="672" x2="732" y2="672" stroke="#333" stroke-width="1.6" marker-end="url(#ar)"/>
+  <text x="470" y="688" text-anchor="middle" font-size="11" font-style="italic" fill="#475569">authenticated, sequence-bound close &#8594; no silent truncation</text>
+
+  <!-- legend -->
+  <text x="120" y="762" font-size="10.5" fill="#6b7280">Defeats: A1 downgrade, A2 impersonation, A3 keying, A4 nonce reuse, A5 replay. Colour marks the protection active at each step.</text>
+</svg>
