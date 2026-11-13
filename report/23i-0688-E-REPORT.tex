@@ -35,35 +35,28 @@
 % ======================= TITLE PAGE =======================
 \begin{titlepage}
 \centering
-\vspace*{2.2cm}
-{\Huge\bfseries SmartLock\par}
-\vspace{4pt}
-{\Large Break It, Then Build It\par}
-\vspace{6pt}
-{\large A Cryptographic System Engagement\par}
-\vspace{2.4cm}
+\vspace*{\fill}
+{\Huge\bfseries Information Security\par}
+\vspace{16pt}
+{\Huge\bfseries Assignment 2\par}
+\vspace{26pt}
+\rule{0.42\linewidth}{1pt}\par
+\vspace{26pt}
+{\LARGE A SmartLock Cryptographic Engagement\par}
+\vspace{12pt}
+{\large Attack the shipped lock, then design and build the fix\par}
+\vspace*{\fill}
+{\Large
+\renewcommand{\arraystretch}{1.5}
 \begin{tabular}{rl}
 \textbf{Name} & Faateh Haneef\\
 \textbf{Roll} & 23i-0688\\
 \textbf{Section} & E\\
-\textbf{Course} & CS3002 --- Information Security, Assignment 2\\
-\end{tabular}
-\vspace{1.8cm}
-
-\begin{minipage}{0.86\linewidth}
-\textbf{Build commands.} All code is C++17 and links OpenSSL's \texttt{libcrypto},
-built on Ubuntu/Kali with \texttt{g++} 13.3 and OpenSSL 3.0.13:
-\begin{lstlisting}
-sudo apt install build-essential libssl-dev
-make -C SmartLock/smartlock          # v1 lock, hub, instance generator
-make -C SmartLock/v2_skeleton        # v2 lock + hub against securelink2.cpp
-# any single tool:
-g++ -std=c++17 -O2 -Wall <file.cpp> -o <bin> -lcrypto
-\end{lstlisting}
-\end{minipage}
-
-\vfill
-{\small Recovered flag: \texttt{FLAG\{4b9489d8c219ed28\}}\par}
+\textbf{Course} & CS3002, Information Security\\
+\end{tabular}\par}
+\vspace{40pt}
+{\large Recovered flag: \texttt{FLAG\{4b9489d8c219ed28\}}\par}
+\vspace*{\fill}
 \end{titlepage}
 
 \tableofcontents
@@ -79,8 +72,23 @@ produced with a local TCP relay, the two-host model the lab guide accepts. Every
 offensive technique here is applied solely to my own instance so that the corrected
 design in Parts B and C can be built and defended.
 
+% ======================= BUILD =======================
+\section{Build and run}
+All code is C++17 and links OpenSSL's \texttt{libcrypto}, built on Ubuntu/Kali with
+\texttt{g++} 13.3 and OpenSSL 3.0.13. Each exploit reads a captured session; a normal
+session is produced by running the lock and hub.
+\begin{lstlisting}
+sudo apt install build-essential libssl-dev
+make -C SmartLock/smartlock          # v1 lock, hub, instance generator
+make -C SmartLock/v2_skeleton        # v2 lock + hub against securelink2.cpp
+./instance_generator 23i-0688        # writes instance.txt (lock listens on its port)
+./lock_server instance.txt           # terminal 1
+./hub_client  instance.txt 127.0.0.1 # terminal 2 (normal session)
+g++ -std=c++17 -O2 -Wall <file.cpp> -o <bin> -lcrypto   # any single tool or exploit
+\end{lstlisting}
+
 % ======================= PART A =======================
-\section{Part A --- Breaking SmartLock v1}
+\section{Part A - Breaking SmartLock v1}
 
 Every value reported here was recovered \emph{from captured traffic}, not read from
 \texttt{instance.txt}. One capture of a normal session
@@ -90,8 +98,8 @@ reassembled TCP stream (identical to Wireshark ``Follow TCP Stream'').
 \begin{figure}[h]\centering
 \includegraphics[width=\linewidth]{shot_v1_normal_stream.png}
 \caption{A normal v1 session in clear: the offered suites (including \texttt{NULL}),
-the self-signed certificate, the MD5 \texttt{pinhash}, the Diffie--Hellman
-\texttt{p,g,B,A}, and the encrypted records --- all readable, with the same nonce on
+the self-signed certificate, the MD5 \texttt{pinhash}, the Diffie-Hellman
+\texttt{p,g,B,A}, and the encrypted records - all readable, with the same nonce on
 every record.}
 \end{figure}
 
@@ -116,7 +124,7 @@ is the correct value an attacker recovers from the wire.
 
 \subsection{A.2 Five-stage exploits}
 
-\subsubsection*{Stage 1 --- Negotiation: downgrade (TASKA1)}
+\subsubsection*{Stage 1 - Negotiation: downgrade (TASKA1)}
 \textbf{Weakness.} The hub's offered-suite list is unauthenticated and one option is
 \texttt{NULL} (no encryption). An on-path attacker rewrites the hub's \texttt{HELLO}
 to offer only \texttt{NULL}; the lock then has nothing stronger to choose and every
@@ -135,7 +143,7 @@ record, including the greeting that carries the flag, is sent in clear.
 the flag) in plaintext.}
 \end{figure}
 
-\subsubsection*{Stage 2 --- Authentication: impersonation / MITM (TASKA2)}
+\subsubsection*{Stage 2 - Authentication: impersonation / MITM (TASKA2)}
 \textbf{Weakness.} The lock's certificate is self-signed and the hub never validates
 it; the DH values are unsigned. A man in the middle presents its own certificate and
 runs two separate key exchanges, holding a different key with each side.
@@ -150,7 +158,7 @@ runs two separate key exchanges, holding a different key with each side.
 \end{lstlisting}
 \prop{authentication}
 
-\subsubsection*{Stage 2 --- the pairing PIN}
+\subsubsection*{Stage 2 - the pairing PIN}
 \textbf{Weakness.} The PIN is a dictionary word plus three digits, sent as a fast,
 unsalted \textbf{MD5}. Reading the \texttt{pinhash} from \texttt{PAIR} and running an
 offline dictionary with a three-digit mask recovers it in milliseconds.
@@ -161,7 +169,7 @@ cracked_pin    = violet996
 \end{lstlisting}
 \prop{confidentiality of the credential}
 
-\subsubsection*{Stage 3 --- Keying: discrete log (TASKA3)}
+\subsubsection*{Stage 3 - Keying: discrete log (TASKA3)}
 \textbf{Weakness.} The DH prime is $\approx$40 bits, the record key is the
 \emph{raw} shared secret (no KDF), and the device exponent is static. Baby-step/
 giant-step solves the discrete log in moments; the key is rebuilt and the greeting
@@ -174,7 +182,7 @@ forward secrecy).
 \end{lstlisting}
 \prop{confidentiality of the key, and forward secrecy}
 
-\subsubsection*{Stage 4 --- Message protection: nonce reuse (TASKA4)}
+\subsubsection*{Stage 4 - Message protection: nonce reuse (TASKA4)}
 \textbf{Weakness.} Every record uses one fixed nonce under one key, in both
 directions. Two ciphertexts then share the GCM keystream, so $C_1\oplus C_2 =
 P_1\oplus P_2$. The greeting's known prefix recovers the other plaintext with no key.
@@ -185,7 +193,7 @@ nonce_xor_hex  = 0335282620446c382a3f2d6473180f1e1b2f0410561e
 \end{lstlisting}
 \prop{confidentiality and integrity of the records}
 
-\subsubsection*{Stage 5 --- Teardown: replay (TASKA5)}
+\subsubsection*{Stage 5 - Teardown: replay (TASKA5)}
 \textbf{Weakness.} Records carry no sequence number and the lock keeps no anti-replay
 state; the static exponent and nonce make a replayed handshake reproduce the same
 key, so a captured \texttt{UNLOCK} still decrypts and still opens the door.
@@ -198,10 +206,10 @@ key, so a captured \texttt{UNLOCK} still decrypts and still opens the door.
 \prop{integrity and availability}
 
 % ======================= PART B =======================
-\section{Part B --- Designing SmartLock v2}
+\section{Part B - Designing SmartLock v2}
 
 \subsection{Threat model}
-\textbf{Attacker.} A Dolev--Yao network attacker sharing the local link: it observes
+\textbf{Attacker.} A Dolev-Yao network attacker sharing the local link: it observes
 every byte, and can modify, drop, reorder, inject, and replay any TCP segment in
 either direction, including rewriting handshake fields in flight; it may run its own
 hub, lock, or relay, and knows the full protocol and all public parameters.
@@ -212,7 +220,7 @@ later session. Because the PIN is low-entropy, anything derived from it on the w
 must not be offline-guessable.
 \textbf{Goals.} Confidentiality, integrity and authenticity of every record; device
 authentication; negotiation integrity; forward secrecy; replay resistance; and PIN
-protection on the wire and at rest. \emph{Non-goal:} record-level non-repudiation ---
+protection on the wire and at rest. \emph{Non-goal:} record-level non-repudiation -
 records use a shared AEAD key, so either party could have produced a tag; v2 gives
 entity authentication, not per-message non-repudiation.
 
@@ -260,7 +268,7 @@ derivation, and sequence binding happen, and the attack each stage closes.}
 \end{figure}
 
 % ======================= PART C =======================
-\section{Part C --- Implementing and testing SmartLock v2}
+\section{Part C - Implementing and testing SmartLock v2}
 
 The security core is \texttt{securelink2.cpp}: suite policy, HKDF key derivation,
 the per-record nonce, and the sequence-bound AEAD. The provided scaffold supplies
@@ -274,7 +282,7 @@ Check 2: key derived via KDF, not the raw secret                [all PASS]
 Check 3: unique nonce per sequence number                       [all PASS]
 Check 4: AEAD seals and opens a record correctly                [PASS]
 Check 5: replay / out-of-order / tamper are rejected            [all PASS]
-Check 6: source scan -- contains "hkdf"/"evp_kdf", no md5/TODO
+Check 6: source scan - contains "hkdf"/"evp_kdf", no md5/TODO
 ALL CHECKS PASSED (0 failures)
 \end{lstlisting}
 
@@ -321,7 +329,7 @@ channel, which gives the same ``nothing offline-guessable on the wire'' guarante
 using concepts we were taught.
 \item \textbf{A latent nonce pitfall.} Both directions start at sequence number~0, so
 a naive implementation that derived a \emph{single} key for the session would reuse
-the \texttt{(key,nonce)} pair across the two directions --- exactly the two-time-pad
+the \texttt{(key,nonce)} pair across the two directions - exactly the two-time-pad
 mistake exploited in A4. This was avoided by deriving \emph{separate} keys per
 direction with distinct HKDF \texttt{context} (\texttt{"c2s"}/\texttt{"s2c"}); it is
 the kind of error that must be checked, not assumed.
@@ -333,7 +341,7 @@ same scrutiny as the crypto it measures.
 \end{itemize}
 
 % ======================= PART D =======================
-\section{Part D --- Performance study}
+\section{Part D - Performance study}
 
 Measured on an Intel Core i7-11800H under WSL2 Ubuntu, \texttt{g++ -O2}, OpenSSL
 3.0.13, identical flags for both versions. Record benchmarks: 10{,}000 records
@@ -368,7 +376,7 @@ authenticated, pinned device identity (no impersonation), a fresh 2048-bit ephem
 key exchange (forward secrecy, no feasible discrete log), HKDF-derived per-direction
 keys, a unique nonce per record, and sequence binding (no replay or reordering). The
 cost is paid once per session and is dominated by the 2048-bit modular exponentiation
-and the RSA signature verification --- which are the point. For a device that opens a
+and the RSA signature verification - which are the point. For a device that opens a
 front door, a millisecond-scale handshake cost and a few bytes per message are
 irrelevant next to the attacks they close; a lock that is fast but lets a captured
 \texttt{UNLOCK} reopen the door is the real failure.
