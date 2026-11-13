@@ -49,13 +49,23 @@
 {\Large
 \renewcommand{\arraystretch}{1.5}
 \begin{tabular}{rl}
-\textbf{Name} & Faateh Haneef\\
+\textbf{Name} & Syed Muhammad Faateh Haneef\\
 \textbf{Roll} & 23i-0688\\
 \textbf{Section} & E\\
 \textbf{Course} & CS3002, Information Security\\
 \end{tabular}\par}
-\vspace{40pt}
+\vspace{26pt}
 {\large Recovered flag: \texttt{FLAG\{4b9489d8c219ed28\}}\par}
+\vspace{30pt}
+\begin{minipage}{0.88\linewidth}
+\footnotesize\textbf{Build commands} (C++17 + OpenSSL \texttt{libcrypto}, on Ubuntu/Kali):
+\begin{lstlisting}
+sudo apt install build-essential libssl-dev
+make -C SmartLock/smartlock      # v1 lock, hub, instance generator
+make -C SmartLock/v2_skeleton    # v2 lock + hub against securelink2.cpp
+g++ -std=c++17 -O2 -Wall <file.cpp> -o <bin> -lcrypto   # any exploit or tool
+\end{lstlisting}
+\end{minipage}
 \vspace*{\fill}
 \end{titlepage}
 
@@ -71,21 +81,6 @@ nothing was bridged to the campus network or the internet. The on-path attacks w
 produced with a local TCP relay, the two-host model the lab guide accepts. Every
 offensive technique here is applied solely to my own instance so that the corrected
 design in Parts B and C can be built and defended.
-
-% ======================= BUILD =======================
-\section{Build and run}
-All code is C++17 and links OpenSSL's \texttt{libcrypto}, built on Ubuntu/Kali with
-\texttt{g++} 13.3 and OpenSSL 3.0.13. Each exploit reads a captured session; a normal
-session is produced by running the lock and hub.
-\begin{lstlisting}
-sudo apt install build-essential libssl-dev
-make -C SmartLock/smartlock          # v1 lock, hub, instance generator
-make -C SmartLock/v2_skeleton        # v2 lock + hub against securelink2.cpp
-./instance_generator 23i-0688        # writes instance.txt (lock listens on its port)
-./lock_server instance.txt           # terminal 1
-./hub_client  instance.txt 127.0.0.1 # terminal 2 (normal session)
-g++ -std=c++17 -O2 -Wall <file.cpp> -o <bin> -lcrypto   # any single tool or exploit
-\end{lstlisting}
 
 % ======================= PART A =======================
 \section{Part A - Breaking SmartLock v1}
