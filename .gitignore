@@ -39,3 +39,6 @@ report/*.aux
 report/*.log
 report/*.toc
 report/*.out
+
+# Submission package (upload artifact, not repo content)
+*.zip
