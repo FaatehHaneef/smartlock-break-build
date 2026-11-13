@@ -20,11 +20,16 @@ https://github.com/FaatehHaneef/smartlock-break-build (public, by choice).
 - C.2: re-run evidence in `23i-0688-E/evidence/` (downgrade+impersonation blocked, keying/nonce/replay N/A).
 - Part D: `23i-0688-E/performance/` harness (TASKD), CSV data, `perf_results.md`, SVG chart.
 
+## DONE since (2026-11-13)
+- Kali evidence pass complete: real `.pcap`s + tool output + 2 Wireshark screenshots, pushed from Kali.
+- Part B design write-up (`report/PartB-design.md`), aligned to the course slides (no PAKE; in-channel challenge-response + salted slow KDF for the PIN).
+- Portfolio README with cover banner + handshake diagram (`report/cover.*`, `report/v2-handshake.*`).
+- Final report compiled with **Tectonic** (LaTeX): `report/23i-0688-E-REPORT.tex` -> `23i-0688-E/23i-0688-E-REPORT.pdf` (9 pages). Tectonic exe: `C:\Users\sfate\AppData\Local\Programs\tectonic\tectonic.exe`. Rebuild: run it on the .tex from `report/`. SVG->PNG via `rsvg-convert` (installed); PDF view via `pdftoppm` (poppler, installed).
+
 ## REMAINING (pick up here)
-1. **Part B design write-up** (18): threat model; per-stage mechanism tied to each A attack; v2 handshake diagram. -> report content.
-2. **Report REPORT.pdf**: assemble Parts A-D with evidence inline; the C.2 "v1 attack -> v2 result" table; scope/ethics paragraph; and the **AI-audit reflection (3 marks) in your own words**. Report tooling not yet decided (draft in Markdown, finalize in Word, or generate via pandoc).
-3. **Kali evidence pass**: produce real `.pcap`s + Wireshark "Follow TCP Stream" screenshots. A drop-in folder + `KALI_RUNBOOK.md` still to be prepared; then it's just capture/screenshot.
-4. **Viva prep** (be able to re-run exploits on an unseen capture; explain own code).
+1. **AI-audit paragraph** (3 marks): the report has a truthful draft in section 4.3 (C.2), but it should be rewritten in the user's OWN voice before submission (PAKE->challenge-response correction; per-direction key / nonce pitfall; test-harness bug).
+2. **Final submission zip**: build `23i-0688-E.zip` from the `23i-0688-E/` folder per the Deliverables layout (no binaries/.git). Save `git log --stat` to `evidence/git_log.txt`.
+3. **Viva prep** (be able to re-run exploits on an unseen capture; explain own code).
 
 ## Gotchas learned
 - Run v1/v2 lock in background and **kill by captured PID**, not `pkill -f "lock_server instance.txt"` (that pattern matches the parent shell).
