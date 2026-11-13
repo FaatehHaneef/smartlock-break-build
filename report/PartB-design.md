@@ -76,9 +76,7 @@ warranted here.
     stops replay; and because the channel is authenticated (pinned certificate, so
     no man in the middle) and encrypted (ephemeral-DH key), an eavesdropper who
     captures the pairing sees only ciphertext and has nothing to offline-guess,
-    even though the PIN itself is low-entropy. (A dedicated PAKE such as SPAKE2
-    would give the same guarantee without relying on the outer channel, but it is
-    outside our syllabus, so we lean on the authenticated channel instead.)
+    even though the PIN itself is low-entropy.
   - *At rest:* the lock stores the PIN as a **salted, slow KDF** digest -
     Argon2id (or scrypt / PBKDF2 with a high iteration count) - never raw MD5, so
     a stolen device database is not trivially cracked.

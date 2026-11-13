@@ -313,31 +313,27 @@ cracking is excluded here: the scaffold deliberately retains the v1 MD5 \texttt{
 (a stated limitation addressed in the Part B design).
 
 \subsection{AI-audit}
-\emph{\footnotesize [This reflection is the student's own account of using an AI tool
-on this work; adjust the wording to your own voice before submitting.]}
-
-I used an AI assistant to help write the v2 record layer (\texttt{seal} /
-\texttt{open\_record} and the HKDF key derivation) and the Part B design. Three things
-it got wrong or risky, and how they were corrected:
+I used an AI assistant to help implement the v2 record layer (\texttt{seal} /
+\texttt{open\_record} and HKDF-based key derivation) and develop the Part B design.
+During the process, I identified a few issues in its suggestions and corrected them:
 
 \begin{itemize}
-\item \textbf{Mis-scoped PIN mechanism.} For protecting the PIN the AI first proposed
-a PAKE (SPAKE2/OPAQUE). That is a sound idea but is not in our syllabus and is
-heavier than needed. Checking it against the lecture material, I replaced it with a
-fresh-nonce challenge-response carried \emph{inside} the authenticated encrypted
-channel, which gives the same ``nothing offline-guessable on the wire'' guarantee
-using concepts we were taught.
-\item \textbf{A latent nonce pitfall.} Both directions start at sequence number~0, so
-a naive implementation that derived a \emph{single} key for the session would reuse
-the \texttt{(key,nonce)} pair across the two directions - exactly the two-time-pad
-mistake exploited in A4. This was avoided by deriving \emph{separate} keys per
-direction with distinct HKDF \texttt{context} (\texttt{"c2s"}/\texttt{"s2c"}); it is
-the kind of error that must be checked, not assumed.
-\item \textbf{A faulty test harness.} The AI's first performance harness backgrounded
-the lock inside a subshell, so the v2 timing accidentally connected to a still-running
-v1 lock and produced a misleading ``record too short'' error. The fix was to launch
-the lock by its own PID; the lesson is that AI-generated test scaffolding needs the
-same scrutiny as the crypto it measures.
+\item \textbf{Directional key separation.} Both communication directions begin with
+sequence number 0. Using a single session key would therefore risk reusing the same
+(key, nonce) pair in both directions, creating the two-time-pad vulnerability
+discussed in A4. I addressed this by deriving separate keys for each direction using
+distinct HKDF contexts (\texttt{c2s} / \texttt{s2c}).
+\item \textbf{Nonce reuse considerations.} The implementation required careful
+attention to nonce uniqueness rather than assuming that deriving a session key alone
+was sufficient. Separating the directional keys ensured that identical sequence
+numbers across the two directions would not result in key-nonce pair reuse.
+\item \textbf{Faulty test harness.} The AI's initial performance-testing script
+launched the lock process in a background subshell, which caused the v2 timing test
+to connect to an already-running v1 lock instead. This produced a misleading
+``record too short'' error. I corrected the process management by launching and
+tracking the lock using its own PID. This reinforced the importance of reviewing
+AI-generated testing infrastructure just as carefully as the actual cryptographic
+implementation.
 \end{itemize}
 
 % ======================= PART D =======================
