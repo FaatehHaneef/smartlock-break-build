@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b2735"/><stop offset="1" stop-color="#0f1620"/>
+    </linearGradient>
+    <marker id="arw" markerWidth="12" markerHeight="12" refX="7" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#94a3b8"/></marker>
+  </defs>
+  <rect x="0" y="0" width="1200" height="440" fill="url(#bg)"/>
+  <rect x="0" y="0" width="8" height="440" fill="#F59E0B"/>
+
+  <!-- left: title block -->
+  <text x="48" y="138" font-size="62" font-weight="bold" fill="#ffffff">SmartLock</text>
+  <rect x="50" y="156" width="210" height="6" rx="3" fill="#F59E0B"/>
+  <text x="50" y="202" font-size="27" font-weight="bold" fill="#F59E0B">Break It, Then Build It</text>
+  <text x="50" y="236" font-size="15" fill="#aab4c0">A cryptographic security engagement: take a deliberately weak IoT</text>
+  <text x="50" y="258" font-size="15" fill="#aab4c0">door-lock protocol apart stage by stage, then design and build the fix.</text>
+
+  <!-- stat chips -->
+  <g font-size="12.5" fill="#e2e8f0">
+    <rect x="50" y="286" width="196" height="30" rx="15" fill="#263445" stroke="#38506b"/>
+    <text x="148" y="306" text-anchor="middle">5 attacks demonstrated</text>
+    <rect x="256" y="286" width="178" height="30" rx="15" fill="#263445" stroke="#38506b"/>
+    <text x="345" y="306" text-anchor="middle">v2 passes 6 / 6 checks</text>
+    <rect x="444" y="286" width="166" height="30" rx="15" fill="#263445" stroke="#38506b"/>
+    <text x="527" y="306" text-anchor="middle">C++17 &#183; OpenSSL</text>
+  </g>
+  <text x="50" y="366" font-size="12.5" fill="#6b7a8d">Negotiation &#183; Authentication &#183; Keying &#183; Message protection &#183; Teardown</text>
+
+  <!-- right: v1 (broken) -> v2 (hardened) -->
+  <!-- v1 red open padlock -->
+  <g>
+    <path d="M782,196 v-12 a26,26 0 0 1 44,-16" fill="none" stroke="#ef4444" stroke-width="9" stroke-linecap="round"/>
+    <rect x="770" y="196" width="80" height="66" rx="10" fill="#ef4444"/>
+    <polyline points="812,204 802,226 818,240 806,254" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="810" y="298" text-anchor="middle" font-size="18" font-weight="bold" fill="#ef4444">v1 &#183; broken</text>
+    <text x="810" y="320" text-anchor="middle" font-size="11.5" fill="#8b97a6">40-bit DH, static nonce, no auth</text>
+  </g>
+
+  <line x1="872" y1="226" x2="958" y2="226" stroke="#94a3b8" stroke-width="3" marker-end="url(#arw)"/>
+  <text x="915" y="214" text-anchor="middle" font-size="12" fill="#94a3b8">redesign</text>
+
+  <!-- v2 green closed padlock with check -->
+  <g>
+    <path d="M982,200 v-14 a26,26 0 0 1 52,0 v14" fill="none" stroke="#22c55e" stroke-width="9" stroke-linecap="round"/>
+    <rect x="968" y="200" width="80" height="66" rx="10" fill="#22c55e"/>
+    <polyline points="992,234 1004,248 1026,220" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1008" y="298" text-anchor="middle" font-size="18" font-weight="bold" fill="#22c55e">v2 &#183; hardened</text>
+    <text x="1008" y="320" text-anchor="middle" font-size="11.5" fill="#8b97a6">2048-bit DHE, HKDF, AEAD + seq</text>
+  </g>
+</svg>
